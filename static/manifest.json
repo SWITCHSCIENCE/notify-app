@@ -1,0 +1,7 @@
+{
+  "name": "Notify App",
+  "short_name": "NotifyApp",
+  "lang": "ja",
+  "display": "standalone",
+  "start_url": "/"
+}
