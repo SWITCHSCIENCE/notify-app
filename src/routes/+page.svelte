@@ -1,4 +1,5 @@
 <script>
+  import { base } from "$app/paths";
   import { clipboard } from "@skeletonlabs/skeleton";
   let contents = "{}";
   const vapidPublicKey =
@@ -20,7 +21,7 @@
   }
   async function subscribeClick() {
     console.log("button clicked");
-    navigator.serviceWorker.register("../service-worker.js");
+    navigator.serviceWorker.register(base + "/service-worker.js");
     let registration = await navigator.serviceWorker.ready;
     let subscription = await registration.pushManager.getSubscription();
     if (!subscription) {
