@@ -37,7 +37,7 @@
   slotTrail="place-content-end"
 >
   <svelte:fragment slot="lead">
-    <a href="/">
+    <a href="{base}/">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="32"
