@@ -1,5 +1,6 @@
 <script>
   import "../app.postcss";
+  import { base } from "$app/paths";
   import { onMount } from "svelte";
   import { autoModeWatcher } from "@skeletonlabs/skeleton";
 
@@ -51,6 +52,9 @@
       </svg>
     </a>
   </svelte:fragment>
-  <svelte:fragment slot="trail"><LightSwitch /></svelte:fragment>
+  <svelte:fragment slot="trail">
+    <a href="{base}/about/">About</a>
+    <LightSwitch />
+  </svelte:fragment>
 </AppBar>
 <slot />
