@@ -1,9 +1,19 @@
 <script>
   import { base } from "$app/paths";
+  import { page } from "$app/stores";
   import { clipboard } from "@skeletonlabs/skeleton";
+  import { goto, afterNavigate } from "$app/navigation";
   let contents = "{}";
-  const vapidPublicKey =
-    "BA5GSOTHKfCUOtPMYFdht02DBDOqp-bVbl84JNk4AuKBhIs9MlyItwO38-VdZt4xiiYW5QJleDCr8NCQevEUXjw";
+  let vapidPublicKey = "";
+  let pubKey = undefined;
+  afterNavigate(() => {
+    pubKey = undefined;
+    vapidPublicKey = "";
+    pubKey = $page.url.searchParams.get("pubKey");
+    if (pubKey != undefined) {
+      vapidPublicKey = pubKey;
+    }
+  });
   function urlBase64ToUint8Array(base64String) {
     const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
     const base64 = (base64String + padding)
@@ -21,6 +31,9 @@
   }
   async function subscribeClick() {
     console.log("button clicked");
+    $page.url.searchParams.set("pubKey", vapidPublicKey);
+    console.log($page.url);
+    goto($page.url);
     navigator.serviceWorker.register(base + "/service-worker.js");
     let registration = await navigator.serviceWorker.ready;
     let subscription = await registration.pushManager.getSubscription();
@@ -31,16 +44,26 @@
   }
 </script>
 
-<div class="container h-full mx-auto flex justify-center items-center">
-  <div class="card h-full">
-    <header class="card-header items-center">
-      <button class="btn variant-filled" on:click={subscribeClick}>
-        Subscribe
-      </button>
+<div class="container mx-auto">
+  <div class="card">
+    <header class="card-header">
+      <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+        <span></span>
+        <input
+          class=""
+          type="text"
+          placeholder="Public Key"
+          bind:value={vapidPublicKey}
+          disabled={pubKey != undefined}
+        />
+        <button class="variant-filled-secondary" on:click={subscribeClick}>
+          Subscribe
+        </button>
+      </div>
     </header>
     <section class="p-4">
       <div
-        class="box-border w-96 md:box-content text-wrap break-words"
+        class="box-border md:box-content text-wrap break-all"
         data-clipboard="subscription"
       >
         {contents}

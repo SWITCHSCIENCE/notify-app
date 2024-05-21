@@ -39,6 +39,7 @@
   <svelte:fragment slot="lead">
     <a href="{base}/">
       <svg
+        class="display: inline-block"
         xmlns="http://www.w3.org/2000/svg"
         width="32"
         height="32"
@@ -50,6 +51,7 @@
           clip-rule="evenodd"
         />
       </svg>
+      Notify App
     </a>
   </svelte:fragment>
   <svelte:fragment slot="trail">
