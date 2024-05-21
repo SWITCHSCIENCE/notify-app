@@ -51,7 +51,7 @@
           clip-rule="evenodd"
         />
       </svg>
-      Notify App
+      NotifyApp
     </a>
   </svelte:fragment>
   <svelte:fragment slot="trail">
