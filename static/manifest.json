@@ -3,5 +3,5 @@
   "short_name": "NotifyApp",
   "lang": "ja",
   "display": "standalone",
-  "start_url": "/"
+  "start_url": "/notify-app/"
 }
