@@ -3,7 +3,7 @@
   import { page } from "$app/stores";
   import { clipboard } from "@skeletonlabs/skeleton";
   import { goto, afterNavigate } from "$app/navigation";
-  let contents = "{}";
+  let contents = "";
   let vapidPublicKey = "";
   let pubKey = undefined;
   afterNavigate(() => {
