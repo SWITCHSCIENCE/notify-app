@@ -38,8 +38,9 @@
     let registration = await navigator.serviceWorker.ready;
     let subscription = await registration.pushManager.getSubscription();
     if (!subscription) {
-      subscription = await subscribe(registration);
+      await subscription.unregister()
     }
+    subscription = await subscribe(registration);
     contents = JSON.stringify(subscription);
   }
 </script>
