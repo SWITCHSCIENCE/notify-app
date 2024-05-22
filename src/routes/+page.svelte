@@ -37,7 +37,7 @@
     navigator.serviceWorker.register(base + "/service-worker.js");
     let registration = await navigator.serviceWorker.ready;
     let subscription = await registration.pushManager.getSubscription();
-    if (!subscription) {
+    if (subscription) {
       await subscription.unregister()
     }
     contents = JSON.stringify(await subscribe(registration));
