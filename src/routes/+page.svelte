@@ -40,8 +40,7 @@
     if (!subscription) {
       await subscription.unregister()
     }
-    subscription = await subscribe(registration);
-    contents = JSON.stringify(subscription);
+    contents = JSON.stringify(await subscribe(registration));
   }
 </script>
 
