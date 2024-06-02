@@ -4,8 +4,35 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%sveltekit.assets%/favicon.png" />
     <link rel="apple-touch-icon" href="%sveltekit.assets%/favicon.png" />
-    <link rel="manifest" href="%sveltekit.assets%/manifest.json" />
     <meta name="viewport" content="width=device-width" />
+    <script>
+      let url = new URL(location.href);
+      let paths = url.pathname.split("/");
+      const base = location.origin + paths.slice(0, -1).join("/");
+      const pubKey = url.searchParams.get("pubKey");
+      const prefix = `${base}/${pubKey}`;
+      const manifest = {
+        name: "Notify App",
+        short_name: "NotifyApp",
+        description: "通知アプリ",
+        lang: "ja",
+        display: "standalone",
+        start_url: `${base}/?pubKey=${pubKey}`,
+        icons: [
+          {
+            src: `${base}/favicon.png`,
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      };
+      let content = encodeURIComponent(JSON.stringify(manifest));
+      let encoded = "data:application/manifest+json," + content;
+      let element = document.createElement("link");
+      element.setAttribute("rel", "manifest");
+      element.setAttribute("href", encoded);
+      document.querySelector("head").appendChild(element);
+    </script>
     %sveltekit.head%
   </head>
   <body data-sveltekit-preload-data="hover" data-theme="skeleton">

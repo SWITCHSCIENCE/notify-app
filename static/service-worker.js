@@ -35,6 +35,7 @@ self.addEventListener("push", (event) => {
     )
   );
 });
+
 self.addEventListener("notificationclick", (event) => {
   console.log(event);
   let url = event.notification.data.url;

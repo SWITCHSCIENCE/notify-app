@@ -34,11 +34,13 @@
     $page.url.searchParams.set("pubKey", vapidPublicKey);
     console.log($page.url);
     goto($page.url);
-    navigator.serviceWorker.register(base + "/service-worker.js");
+    navigator.serviceWorker.register(
+      base + "/service-worker.js" + $page.url.search
+    );
     let registration = await navigator.serviceWorker.ready;
     let subscription = await registration.pushManager.getSubscription();
     if (subscription) {
-      await subscription.unsubscribe()
+      await subscription.unsubscribe();
     }
     contents = JSON.stringify(await subscribe(registration));
   }
