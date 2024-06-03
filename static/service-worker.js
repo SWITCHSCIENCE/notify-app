@@ -3,15 +3,16 @@ self.addEventListener("push", (event) => {
     return;
   }
   let data = event.data.json();
-  console.log(`[Service Worker] Push Receive data: "${JSON.stringify(data)}"`);
   let options = {
-    icon: data.icon,
     body: data.body,
     tag: data.tag,
     data: data.data,
     badge: data.badge,
     requireInteraction: data.requireInteraction || false,
   };
+  if (data.icon) {
+    options.icon = data.icon;
+  }
   if (data.actions) {
     options.actions = data.actions;
   }
@@ -28,6 +29,9 @@ self.addEventListener("push", (event) => {
       options.vibrate = data.vibrate;
     }
   }
+  console.log(
+    `[Service Worker] Push Receive data: "${JSON.stringify(options)}"`
+  );
   event.waitUntil(
     self.registration.showNotification(
       data.title || "Push Notification",
