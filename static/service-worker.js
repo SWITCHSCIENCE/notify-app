@@ -33,7 +33,7 @@ self.addEventListener("push", (event) => {
     `[Service Worker] Push Receive data: "${JSON.stringify(options)}"`
   );
   event.waitUntil(
-    self.registration.showNotification(
+    event.target.registration.showNotification(
       data.title || "Push Notification",
       options
     )
