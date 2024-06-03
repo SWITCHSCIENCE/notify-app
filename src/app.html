@@ -26,14 +26,14 @@
           },
         ],
       };
+      let blob = new Blob([JSON.stringify(manifest)], {
+        type: "application/manifest+json",
+      });
       let content = URL.createObjectURL(
-        new File([JSON.stringify(manifest)], "manifest.webmanifest")
+        new File([blob], "manifest.webmanifest")
       );
-      //let content = encodeURIComponent(JSON.stringify(manifest));
-      //let encoded = "data:application/manifest+json," + content;
       let element = document.createElement("link");
       element.setAttribute("rel", "manifest");
-      //element.setAttribute("href", encoded);
       element.setAttribute("href", content);
       document.querySelector("head").appendChild(element);
     </script>
