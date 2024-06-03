@@ -13,6 +13,7 @@
       const pubKey = url.searchParams.get("pubKey");
       const prefix = `${base}/${pubKey}`;
       const manifest = {
+        id: `${pubKey}`,
         name: "Notify App",
         short_name: "NotifyApp",
         description: "通知アプリ",
